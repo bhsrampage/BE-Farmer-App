@@ -1,6 +1,23 @@
 {
   "translation": {
     "PictureButtonLabel": "Take Soil Picture",
-    "HistoryButtonLabel": "Upload my history"
+    "HistoryButtonLabel": "Upload my history",
+    "Welcome": "Welcome Back",
+    "Email": "Email",
+    "Password": "Password",
+    "Login": "Login",
+    "ForgotPassword": "Forgot Your Password",
+    "AccountQuestion": "Don't Have An Account",
+    "SignUp": "Sign up",
+    "RstrPass": "Restore Password",
+    "ResetPassword": "Reset Password",
+    "ToLogin": "Back To Login",
+    "CreateAccount": "Create Account",
+    "Name": "Name",
+    "HaveAccount": "Already have an account",
+    "EmailEmpty": "Email cannot be empty",
+    "EmailInValid": "Ooops! We need a valid email address",
+    "PasswordEmpty": "Password cannot be empty",
+    "NameEmpty": "Name cannot be empty"
   }
 }

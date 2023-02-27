@@ -41,7 +41,7 @@ const theme = {
     secondary: "#00D100",
     accent: "#00FF00",
     disabled: "#C9D0DB",
-    error: "#FFB3C0",
+    error: "#E41B17",
     error_light: "rgba(255, 179, 192, 0.27)",
     accent_light: "rgba(127, 218, 192, 0.27)",
     backgroundLight: "#8AFF8A",
