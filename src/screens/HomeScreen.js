@@ -5,18 +5,21 @@ import SubmitButton from "../components/SubmitButton";
 import * as Location from "expo-location";
 
 const HomeScreen = ({ navigation }) => {
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   const captureDetails = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      alert("Permission to access location was denied");
+      alert(t("PermissionRequest"));
       return;
     }
 
     let location = await Location.getCurrentPositionAsync({});
     // console.log(location.coords);
-    navigation.navigate("Upload", { location });
+    navigation.navigate("Recommendation", {
+      screen: "Soil",
+      params: { location },
+    });
   };
 
   return (
@@ -27,7 +30,12 @@ const HomeScreen = ({ navigation }) => {
           onClick={captureDetails}
         />
         <View style={{ height: 30 }} />
-        <SubmitButton label={t("HistoryButtonLabel")} />
+        <SubmitButton
+          label={t("HistoryButtonLabel")}
+          onClick={() =>
+            navigation.navigate("History", { screen: "ViewHistory" })
+          }
+        />
       </View>
     </View>
   );

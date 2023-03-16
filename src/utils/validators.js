@@ -7,14 +7,23 @@ export const emailValidator = (email, emptyError, validErrror) => {
   return "";
 };
 
-export const passwordValidator = (password, emptyError) => {
-  if (!password || password.length <= 0) return emptyError;
-
+export const emptyValidator = (value, error) => {
+  if (!value || value.length == 0) return error;
   return "";
 };
 
-export const nameValidator = (name, emptyError) => {
-  if (!name || name.length <= 0) return emptyError;
-
+export const phoneValidator = (phone, error) => {
+  if (!phone || phone.length !== 10) return error;
   return "";
 };
+// export const passwordValidator = (password, emptyError) => {
+//   if (!password || password.length <= 0) return emptyError;
+
+//   return "";
+// };
+
+// export const nameValidator = (name, emptyError) => {
+//   if (!name || name.length <= 0) return emptyError;
+
+//   return "";
+// };

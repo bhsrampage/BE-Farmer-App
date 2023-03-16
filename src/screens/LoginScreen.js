@@ -1,16 +1,17 @@
-import React, { memo, useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
-import Background from "../components/Background.js";
+import React, { memo, useContext, useState } from "react";
+import { TouchableOpacity, StyleSheet, View, Image } from "react-native";
 import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import { Text, useTheme } from "react-native-paper";
 import { emailValidator, passwordValidator } from "../utils/validators";
 import SubmitButton from "../components/SubmitButton";
 import { useTranslation } from "react-i18next";
+import { GlobalContext } from "../auth/GlobalProvider.js";
 
 const LoginScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const { login, loading } = useContext(GlobalContext);
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
@@ -28,61 +29,83 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate("MainTab");
+    login(email, password);
   };
 
   return (
-    <Background>
-      <Header title={t("Welcome")} />
-
-      <TextInput
-        label={t("Email")}
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+    <View style={styles.container}>
+      <Header
+        title={t("Welcome")}
+        noArrow={true}
+        // style={{ position: "absolute", top: 10 }}
       />
-
-      <TextInput
-        label={t("Password")}
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
+      <Image
+        source={require("../assets/logo.jpg")}
+        style={{
+          alignSelf: "center",
+          height: "25%",
+          width: "90%",
+          marginTop: 30,
+        }}
       />
+      <View style={{ marginTop: "10%", alignItems: "center" }}>
+        <TextInput
+          label={t("Email")}
+          returnKeyType="next"
+          value={email.value}
+          onChangeText={(text) => setEmail({ value: text, error: "" })}
+          error={!!email.error}
+          errorText={email.error}
+          autoCapitalize="none"
+          autoCompleteType="email"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+        />
 
-      <View style={styles.forgotPassword}>
+        <TextInput
+          label={t("Password")}
+          returnKeyType="done"
+          value={password.value}
+          onChangeText={(text) => setPassword({ value: text, error: "" })}
+          error={!!password.error}
+          errorText={password.error}
+          secureTextEntry
+        />
+
+        {/* <View style={styles.forgotPassword}>
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
           <Text style={{ color: colors.secondary }}>
             {t("ForgotPassword")}?
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <SubmitButton label={t("Login")} onClick={_onLoginPressed} />
+        <SubmitButton
+          label={t("Login")}
+          onClick={_onLoginPressed}
+          loading={loading}
+        />
 
-      <View style={styles.row}>
-        <Text style={{ color: colors.secondary, marginRight: 10 }}>
-          {t("AccountQuestion")}?
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-          <Text style={{ fontWeight: "bold", color: colors.primary }}>
-            {t("SignUp")}
+        <View style={styles.row}>
+          <Text style={{ color: colors.secondary, marginRight: 10 }}>
+            {t("AccountQuestion")}?
           </Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+            <Text style={{ fontWeight: "bold", color: colors.primary }}>
+              {t("SignUp")}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </Background>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
   forgotPassword: {
     width: "100%",
     alignItems: "flex-end",

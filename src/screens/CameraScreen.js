@@ -36,7 +36,7 @@ const CameraScreen = ({ navigation, route }) => {
     setClicking(false);
   };
   const __savePhoto = () => {
-    navigation.navigate("Recommendation");
+    navigation.navigate("Soil", { Img: capturedImage });
   };
   const __retakePicture = () => {
     setCapturedImage(null);
